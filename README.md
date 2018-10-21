@@ -2,6 +2,7 @@
 Support Promise, Compatible ie9+
 
 ## demo
+[demo](https://checkson.github.io/flex-jsonp/demo.html)
 
 ## install
 ```
