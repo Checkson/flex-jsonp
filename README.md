@@ -6,7 +6,7 @@ Support Promise, Compatible ie9+
 
 ## install
 ```
-  npm i flex-jsonp --save
+npm install flex-jsonp --save
 ```
 
 ## usage
@@ -27,7 +27,7 @@ flexJsonp({
 ```
 
 ## parameters
-names | types | default | explain
+names | type | default | explain
 :---:|:---:|:---:|:---:
 url | string | '' | The url requested by JSONP
 params | object | {} | Request parameters
