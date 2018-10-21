@@ -1,0 +1,20 @@
+{
+  "name": "flex-jsonp",
+  "version": "0.0.1",
+  "description": "a flex jsonp library",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Checkson/flex-jsonp.git"
+  },
+  "keywords": [
+    "jsonp",
+    "promise"
+  ],
+  "author": "Checkson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Checkson/flex-jsonp/issues"
+  },
+  "homepage": "https://github.com/Checkson/flex-jsonp#readme"
+}
