@@ -1,5 +1,5 @@
 # flex-jsonp
-Support Promise, Compatible ie9+
+Support Promise For JSONP;
 
 ## demo
 [demo](https://checkson.github.io/flex-jsonp/demo.html)
@@ -33,7 +33,7 @@ url | string | '' | The url requested by JSONP
 params | object | {} | Request parameters
 timeout | number | 0 | Request timeout setting
 callbackParam | string | 'cb' | JSONP callback function parameter name
-callback | string | 'calback'+${seed} |  JSONP callback function name
+callback | string | 'callback'+${seed} |  JSONP callback function name
 
 ## License
 MIT

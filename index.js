@@ -16,8 +16,6 @@
 
   // Jsonp callback function seed.
   var seed = 0;
-  // Judge if support promise.
-  var isSupport = typeof Promise === 'undefined' ? false : true;
   // Choose encode type
   var enc = encodeURIComponent;
 
@@ -61,8 +59,7 @@
   // Jsonp
   var flexJsonp = function (options) {
 
-    var _this = this,
-        settings = options || {},
+    var settings = options || {},
         url = settings.url || '',
         timeout = settings.timeout || 0,
         params = settings.params || {},
@@ -74,51 +71,21 @@
     var script = createScript(buildUrlParams(url, params)),
         timer;
 
-    if (isSupport) {
-      return new Promise(function (resolve, reject) {
-          // Timeout
-          if (timeout) {
-            timer = setTimeout(function () {
-              cleanup(script, callback, timer);
-              reject(new Error('Timeout'))
-            }, timeout);
-          }
-          // Process the returned data
-          window[callback] = function (data) {
-            cleanup(script, callback, timer);
-            resolve(data);
-          }
-      });
-    } else {
-      var MyPromise = function () {
+    return new Promise(function (resolve, reject) {
         // Timeout
         if (timeout) {
           timer = setTimeout(function () {
             cleanup(script, callback, timer);
+            reject(new Error('Timeout'))
           }, timeout);
         }
         // Process the returned data
-        this.then = function (fn) {
-          window[callback] = function (data) {
-            cleanup(script, callback, timer);
-            fn && fn.call(_this, data);
-          }
-          return this;
-        };
-        // Catch timeout error
-        this.catch = function (fn) {
-          if (timer && timeout) {
-            clearTimeout(timer);
-            timer = setTimeout(function () {
-              cleanup(script, callback, timer);
-              fn && fn.call(_this, new Error('Timeout'));
-            }, timeout);
-          }
-          return this;
+        window[callback] = function (data) {
+          cleanup(script, callback, timer);
+          resolve(data);
         }
-      }
-      return new MyPromise();
-    }
+    });
+    
   }
 
   if (typeof module !== 'undefined' && module.exports) {
