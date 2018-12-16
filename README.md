@@ -1,5 +1,5 @@
 # flex-jsonp
-Support Promise For JSONP;
+Support Promise For JSONP, Compatible with ie5+;
 
 ## demo
 [demo](https://checkson.github.io/flex-jsonp/demo.html)
@@ -9,7 +9,24 @@ Support Promise For JSONP;
 npm install flex-jsonp --save
 ```
 
-## usage
+## suggest usage to Compatible ie5+
+```javascript
+flexJsonp({
+  url: 'http://suggestion.baidu.com/su',
+  params: {
+    wd: keywords,
+    p: 3,
+    t: new Date().getTime()
+  },
+  callbackParam: 'cb'
+}).then(function (res) {
+  console.log(res);
+}, function (err) {
+  console.log(err);
+});
+```
+
+## chain usage
 ```javascript   
 flexJsonp({
   url: 'http://suggestion.baidu.com/su',

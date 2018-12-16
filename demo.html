@@ -181,7 +181,9 @@
         // Show Tips When Input.
         bindEvent(oInput, 'keyup', function (e) {
           toggleTips(true);
-          var val = e.target.value;
+          var ev = e || window.event;
+          var target = e.target || ev.srcElement;
+          var val = target.value;
           if (e.keyCode === 13) {
             executeSearch(val);
           } else {
@@ -190,7 +192,8 @@
         });
         // Hide Tips When Click Document.
         bindEvent(document, 'click', function (e) {
-          var target = e.target;
+          var ev = e || window.event;
+          var target = e.target || ev.srcElement;
           if (target.className === 'tips-item') {
             executeSearch(target.innerHTML);
           } else if (target.className === 'search-type' ) {
@@ -221,7 +224,7 @@
           callbackParam: 'cb'
         }).then(function (res) {
           responseHandle(res);
-        }).catch(function (err) {
+        }, function (err) {
           window.console.log(err);
         });
       }
