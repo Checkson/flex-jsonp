@@ -22,24 +22,19 @@
 
   // If Not Support Promise
   if (!_Promise) {
-    // Define Bind Function
+    // If Not Exist Bind Method
     if (!Function.prototype.bind) {
-      Function.prototype.bind = function (oThis) {
+      // Define Bind Method
+      Function.prototype.bind = function (context) {
         if (typeof this !== "function") {
           throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
         }
-        var aArgs = Array.prototype.slice.call(arguments, 1),
-        fToBind = this,
-        fNOP = function () {},
-        fBound = function () {
-          return fToBind.apply(this instanceof fNOP && oThis
-          ? this
-          : oThis,
-          aArgs.concat(Array.prototype.slice.call(arguments)));
-        };
-        fNOP.prototype = this.prototype;
-        fBound.prototype = new fNOP();
-        return fBound;
+        var _context = context || window;
+        var _this = this;
+        var args = [].slice.call(arguments, 1);
+        return function F () { 
+          return _this.apply(_context, args.concat([].slice.call(arguments)));
+        }
       };
     }
     // Define Promise By Self
