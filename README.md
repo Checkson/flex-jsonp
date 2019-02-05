@@ -2,7 +2,7 @@
 Support Promise For JSONP, Compatible with ie5+;
 
 ## demo
-[demo](https://checkson.github.io/flex-jsonp/demo.html)
+[demo](https://checkson.github.io/flex-jsonp/demo/demo.html)
 
 ## install
 ```
