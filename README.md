@@ -1,5 +1,5 @@
 # flex-jsonp
-Support Promise For JSONP;
+Support Promise For JSONP.
 
 ## demo
 [demo](https://checkson.github.io/flex-jsonp/demo/demo.html)
