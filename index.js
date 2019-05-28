@@ -15,93 +15,8 @@
 
   // Jsonp callback function seed.
   var seed = 0;
-  // Judge if support promise.
-  var _Promise = typeof Promise === 'undefined' ? null : Promise;
   // Choose encode type
   var enc = encodeURIComponent;
-
-  // If Not Support Promise
-  if (!_Promise) {
-    // If Not Exist Bind Method
-    if (!Function.prototype.bind) {
-      // Define Bind Method
-      Function.prototype.bind = function (context) {
-        if (typeof this !== "function") {
-          throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-        }
-        var _context = context || window;
-        var _this = this;
-        var args = [].slice.call(arguments, 1);
-        return function F () { 
-          return _this.apply(_context, args.concat([].slice.call(arguments)));
-        }
-      };
-    }
-    // Define Promise By Self
-    var MyPromise = function (fn) {
-      this.val = undefined;
-      this.status = 'pending';
-      this.resolveFn = function () {};
-      this.rejectFn = function () {};
-      fn(this.resolve.bind(this), this.reject.bind(this));
-    }
-    // Define Promise Resolve
-    MyPromise.prototype.resolve = function (newVal) {
-      if (this.status !== 'pending') return;
-      var _this = this;
-      _this.status = 'fulfilled';
-      _this.val = newVal;
-      setTimeout(function () {
-        _this.resolveFn && _this.resolveFn(_this.val);
-      }, 0)
-    }
-    // Define Promise Reject
-    MyPromise.prototype.reject = function (newVal) {
-      if (this.status !== 'pending') return;
-      var _this = this;
-      _this.status = 'rejected';
-      _this.val = newVal;
-      setTimeout(function () {
-        _this.rejectFn && _this.rejectFn(_this.val);
-      }, 0)
-    }
-    // Define Promise Then
-    MyPromise.prototype.then = function (resolveFn, rejectFn) {
-      var _this = this;
-      return new _this.constructor (function (nextResolve, nextReject) {
-        
-        var nextResolveFn,
-            nextRejectFn;  
-
-        resolveFn && (nextResolveFn = function () {
-          var res = resolveFn(_this.val);
-          if (res && res instanceof _this.constructor) {
-            res.then(nextResolve, nextReject);
-          } else {
-            nextResolve(res);
-          }
-        })
-
-        rejectFn && (nextRejectFn = function () {
-          var res = rejectFn(_this.val);
-          if (res && res instanceof _this.constructor) {
-            res.then(nextResolve, nextReject);
-          } else {
-            nextResolve(res);
-          }
-        });
-
-        _this.resolveFn = nextResolveFn;
-        _this.rejectFn = nextRejectFn;
-      });
-    }
-    // Define Promise catch
-    MyPromise.prototype['catch'] = function (rejectFn) {
-      return this.then(null, rejectFn);
-    }
-    // Promise transfrom
-    _Promise = MyPromise;
-  }
 
   // Clean up function.
   var cleanup = function (script, cb, timer) {
@@ -155,7 +70,7 @@
     var script = createScript(buildUrlParams(url, params)),
         timer;
 
-    return new _Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         // Timeout
         if (timeout) {
           timer = setTimeout(function () {
