@@ -14,7 +14,7 @@
       { title: 'photo', link: 'https://image.baidu.com/search/index?tn=baiduimage&word=' },
       { title: 'news', link: 'https://news.baidu.com/ns?tn=news&ie=utf-8&word=' },
       { title: 'video', link: 'https://video.baidu.com/v?ie=utf-8&word=' },
-      { title: 'map', link: 'http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D' }
+      { title: 'map', link: 'https://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D' }
     ]
 
     // utils  
@@ -108,7 +108,7 @@
 
     function getTips (keywords) {
       flexJsonp({
-        url: 'http://suggestion.baidu.com/su',
+        url: 'https://suggestion.baidu.com/su',
         params: {
           wd: keywords,
           p: 3,
